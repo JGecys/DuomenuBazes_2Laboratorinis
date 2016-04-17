@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - nuoma@localhost" uuid="7aa0d8c8-503c-432c-8128-e3ccee9d2471">
+    <database-info product="MySQL" version="5.5.5-10.1.10-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="nuoma"/>
+      <table id="2" parent="1" name="klientas"/>
+      <table id="3" parent="1" name="nuomos_tarifas"/>
+      <table id="4" parent="1" name="papildoma_iranga"/>
+      <table id="5" parent="1" name="zanrai"/>
+      <table id="6" parent="1" name="serijos"/>
+      <table id="7" parent="1" name="filmai"/>
+      <table id="8" parent="1" name="filmo_ivertinimai"/>
+      <table id="9" parent="1" name="diskai"/>
+      <table id="10" parent="1" name="miestai"/>
+      <table id="11" parent="1" name="padaliniai"/>
+      <table id="12" parent="1" name="darbuotojai"/>
+      <table id="13" parent="1" name="sutartys"/>
+      <table id="14" parent="1" name="mokesciai"/>
+      <table id="15" parent="1" name="mokejimai"/>
+      <table id="16" parent="1" name="apzvalgos"/>
+      <column id="17" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="18" parent="2" name="asmens_kodas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="19" parent="2" name="vardas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="20" parent="2" name="pavarde">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="21" parent="2" name="gimimo_data">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="22" parent="2" name="telefonas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="23" parent="2" name="e_pastas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <key id="24" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="25" parent="3" name="galioja_nuo">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="26" parent="3" name="tarifas">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+      </column>
+      <column id="27" parent="3" name="galioja_iki">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <key id="28" parent="3" name="PRIMARY">
+        <columns>galioja_nuo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="29" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="30" parent="4" name="pavadinimas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="31" parent="4" name="aprasymas">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="32" parent="4" name="kaina">
+        <mandatory>1</mandatory>
+        <data-type>decimal(10,2)</data-type>
+      </column>
+      <key id="33" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="34" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="35" parent="5" name="zanras">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <key id="36" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="37" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="38" parent="6" name="serija">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="39" parent="6" name="fk_zanras">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="40" parent="6" name="fkc_zanras">
+        <columns>fk_zanras</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="41" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="42" parent="6" name="fkc_zanras">
+        <columns>fk_zanras</columns>
+        <ref-key>~.zanrai.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="43" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="44" parent="7" name="pavadinimas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="45" parent="7" name="isleidimo_data">
+        <mandatory>1</mandatory>
+        <data-type>int(5)</data-type>
+      </column>
+      <column id="46" parent="7" name="musu_ivertinimas">
+        <mandatory>1</mandatory>
+        <data-type>decimal(10,2)</data-type>
+      </column>
+      <column id="47" parent="7" name="aprasymas">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="48" parent="7" name="trukme">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="49" parent="7" name="nuomos_kaina">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+      </column>
+      <column id="50" parent="7" name="skirta">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="51" parent="7" name="fk_serija">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="52" parent="7" name="fkc_serija">
+        <columns>fk_serija</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="53" parent="7" name="fkc_skirta">
+        <columns>skirta</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="54" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="55" parent="7" name="fkc_serija">
+        <columns>fk_serija</columns>
+        <ref-key>~.serijos.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="56" parent="7" name="fkc_skirta">
+        <columns>skirta</columns>
+        <ref-key>~.filmo_ivertinimai.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="57" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="58" parent="8" name="ivertinimas">
+        <mandatory>1</mandatory>
+        <data-type>char(11)</data-type>
+      </column>
+      <key id="59" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="60" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="61" parent="9" name="kiek_kartu_nuomuota">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="62" parent="9" name="fk_filmas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="63" parent="9" name="fk_vieta">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="64" parent="9" name="fkc_filmas">
+        <columns>fk_filmas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="65" parent="9" name="fkc_vieta">
+        <columns>fk_vieta</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="66" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="68" parent="10" name="miestas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <key id="69" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="70" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="71" parent="11" name="padalinys">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="72" parent="11" name="adresas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="73" parent="11" name="telefonas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="74" parent="11" name="e_pastas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="75" parent="11" name="fk_miestas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="76" parent="11" name="fkc_miestas">
+        <columns>fk_miestas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="77" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="78" parent="11" name="fkc_miestas">
+        <columns>fk_miestas</columns>
+        <ref-key>~.miestai.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="79" parent="12" name="tabelio_nr">
+        <mandatory>1</mandatory>
+        <data-type>char(6)</data-type>
+      </column>
+      <column id="80" parent="12" name="vardas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="81" parent="12" name="pavarde">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="82" parent="12" name="fk_padalinys">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="83" parent="12" name="fkc_padalinys">
+        <columns>fk_padalinys</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="84" parent="12" name="PRIMARY">
+        <columns>tabelio_nr</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="85" parent="12" name="fkc_padaliniai">
+        <columns>fk_padalinys</columns>
+        <ref-key>~.padaliniai.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="86" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="87" parent="13" name="sutarties_data">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="88" parent="13" name="nuomos_data">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="89" parent="13" name="planuojama_grazinimo_data">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="90" parent="13" name="faktine_grazinimo_data">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="91" parent="13" name="kaina">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+      </column>
+      <column id="92" parent="13" name="fk_diskas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="93" parent="13" name="fk_patvirtino_darbuotojas">
+        <mandatory>1</mandatory>
+        <data-type>char(6)</data-type>
+      </column>
+      <column id="94" parent="13" name="fk_paemimo_vieta">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="95" parent="13" name="fk_grazinimo_vieta">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="96" parent="13" name="fk_papildoma_iranga">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="97" parent="13" name="fk_mokestis">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="98" parent="13" name="fk_mokejimas">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="99" parent="13" name="fk_uzsakovas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="100" parent="13" name="fkc_diskas">
+        <columns>fk_diskas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="101" parent="13" name="fkc_grazinimo_vieta">
+        <columns>fk_grazinimo_vieta</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="102" parent="13" name="fkc_mokejimas">
+        <columns>fk_mokejimas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="103" parent="13" name="fkc_mokestis">
+        <columns>fk_mokestis</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="104" parent="13" name="fkc_paemimo_vieta">
+        <columns>fk_paemimo_vieta</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="105" parent="13" name="fkc_papildoma_iranga">
+        <columns>fk_papildoma_iranga</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="106" parent="13" name="fkc_patvirtino_darbuotojas">
+        <columns>fk_patvirtino_darbuotojas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="107" parent="13" name="fkc_uzsakovas">
+        <columns>fk_uzsakovas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="108" parent="13" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="109" parent="14" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="110" parent="14" name="pavadinimas">
+        <mandatory>1</mandatory>
+        <data-type>varchar(15)</data-type>
+      </column>
+      <column id="111" parent="14" name="aprasymas">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="112" parent="14" name="kaina">
+        <mandatory>1</mandatory>
+        <data-type>decimal(10,2)</data-type>
+      </column>
+      <column id="113" parent="14" name="kiekis">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="114" parent="14" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="115" parent="15" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="116" parent="15" name="apmoketa">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="117" parent="15" name="suma">
+        <mandatory>1</mandatory>
+        <data-type>double</data-type>
+      </column>
+      <column id="118" parent="15" name="saskaita">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="119" parent="15" name="fk_moketojas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="120" parent="15" name="fkc_moketojas">
+        <columns>fk_moketojas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="121" parent="15" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="122" parent="16" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="123" parent="16" name="parasyta">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="124" parent="16" name="apzvalga">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="125" parent="16" name="fk_filmas">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="126" parent="16" name="fk_sukure">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="127" parent="16" name="fkc_filmas">
+        <columns>fk_filmas</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="128" parent="16" name="fkc_sukure">
+        <columns>fk_sukure</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="129" parent="16" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
