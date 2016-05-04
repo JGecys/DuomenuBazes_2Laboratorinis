@@ -29,14 +29,14 @@ if(!empty($_POST['submit'])) {
         $data = $validator->preparePostFieldsForSQL();
         if(isset($data['id'])) {
             // atnaujiname duomenis
-            $ratings->updateRating($data);
+            $ratings->update($data);
         } else {
             // randame didžiausią markės id duomenų bazėje
-            $latestId = $ratings->getMaxIdOfRating();
+            $latestId = $ratings->getMaxId();
 
             // įrašome naują įrašą
             $data['id'] = $latestId + 1;
-            $ratings->insertRating($data);
+            $ratings->insert($data);
         }
 
         // nukreipiame į markių puslapį
@@ -51,7 +51,7 @@ if(!empty($_POST['submit'])) {
 } else {
     // tikriname, ar nurodytas elemento id. Jeigu taip, išrenkame elemento duomenis ir jais užpildome formos laukus.
     if(!empty($id)) {
-        $fields = $ratings->getRating($id);
+        $fields = $ratings->get($id);
     }
 }
 ?>

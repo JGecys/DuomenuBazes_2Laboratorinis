@@ -50,14 +50,14 @@ if (!empty($_POST['submit'])) {
         $data = $validator->preparePostFieldsForSQL();
         if (isset($data['id'])) {
             // atnaujiname duomenis
-            $filmai->updateFilm($data);
+            $filmai->update($data);
         } else {
             // randame didžiausią markės id duomenų bazėje
-            $latestId = $filmai->getMaxIdOfFilm();
+            $latestId = $filmai->getMaxId();
 
             // įrašome naują įrašą
             $data['id'] = $latestId + 1;
-            $filmai->insertFilm($data);
+            $filmai->insert($data);
         }
 
         // nukreipiame į markių puslapį
@@ -72,7 +72,7 @@ if (!empty($_POST['submit'])) {
 } else {
     // tikriname, ar nurodytas elemento id. Jeigu taip, išrenkame elemento duomenis ir jais užpildome formos laukus.
     if (!empty($id)) {
-        $fields = $filmai->getFilm($id);
+        $fields = $filmai->get($id);
     }
 }
 ?>
@@ -107,7 +107,7 @@ if (!empty($_POST['submit'])) {
                 <select id="serija" name="fk_serija" title=''>
                     <?php
 
-                    $seriesList = $serijos->getSeriesList(null, null);
+                    $seriesList = $serijos->getAll(null, null);
 
                     foreach ($seriesList as $key => $val) {
                         $selected = '';
@@ -125,7 +125,7 @@ if (!empty($_POST['submit'])) {
                 <select name="skirta" title=''>
                     <?php
 
-                    $ivertinimaiList = $ivertinimai->getRatingList(null, null);
+                    $ivertinimaiList = $ivertinimai->getAll(null, null);
 
                     foreach ($ivertinimaiList as $key => $val) {
                         $selected = '';
