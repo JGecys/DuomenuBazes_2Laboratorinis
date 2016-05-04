@@ -1,36 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jgecy
- * Date: 2016-04-16
- * Time: 16:06
- */
-
-// sukuriame markių klasės objektą
-include 'libraries/zanrai.class.php';
-include 'libraries/serijos.class.php';
-include 'libraries/filmai.class.php';
-include 'libraries/ivertinimai.class.php';
-include 'libraries/miestai.class.php';
-include 'libraries/padaliniai.class.php';
-include 'libraries/darbuotojai.class.php';
 
 function getLib($module)
 {
     switch ($module) {
         case 'zanrai':
+            include 'libraries/zanrai.class.php';
             return new zanrai();
         case 'serijos':
+            include 'libraries/serijos.class.php';
             return new serijos();
         case 'filmai':
+            include 'libraries/filmai.class.php';
             return new filmai();
         case 'ivertinimai':
+            include 'libraries/ivertinimai.class.php';
             return new ivertinimai();
         case 'miestai':
+            include 'libraries/miestai.class.php';
             return new miestai();
         case 'padaliniai':
+            include 'libraries/padaliniai.class.php';
             return new padaliniai();
         case 'darbuotojai':
+            include 'libraries/darbuotojai.class.php';
             return new darbuotojai();
         default:
             return new zanrai();
