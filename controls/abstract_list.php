@@ -24,7 +24,14 @@ function getLib($module)
         case 'darbuotojai':
             include 'libraries/darbuotojai.class.php';
             return new darbuotojai();
+        case 'klientai':
+            include 'libraries/klientai.class.php';
+            return new klientai();
+        case 'sutartys':
+            include 'libraries/sutartys.class.php';
+            return new sutartys();
         default:
+            include 'libraries/zanrai.class.php';
             return new zanrai();
     }
 }

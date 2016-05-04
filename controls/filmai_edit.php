@@ -79,7 +79,7 @@ if (!empty($_POST['submit'])) {
 <ul id="pagePath">
     <li><a href="index.php">Pradžia</a></li>
     <li><a href="index.php?module=<?php echo $module; ?>">Filmai</a></li>
-    <li><?php if (!empty($id)) echo "Filmo redagavimas"; else echo "Nauajs filmas"; ?></li>
+    <li><?php if (!empty($id)) echo "Filmo redagavimas"; else echo "Naujas filmas"; ?></li>
 </ul>
 <div class="float-clear"></div>
 <div id="formContainer">
@@ -93,7 +93,7 @@ if (!empty($_POST['submit'])) {
     <?php } ?>
     <form action="" method="post">
         <fieldset>
-            <legend>Serijos informacija</legend>
+            <legend>Filmo informacija</legend>
             <p>
                 <label class="field"
                        for="pavadinimas">Pavadinimas<?php echo in_array('pavadinimas', $required) ? '<span> *</span>' : ''; ?></label>

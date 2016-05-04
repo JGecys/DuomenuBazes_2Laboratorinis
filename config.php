@@ -15,7 +15,9 @@ class config
         'ivertinimai' => 'Įvertinimai',
         'miestai' => 'Miestai',
         'padaliniai' => 'Padaliniai',
-        'darbuotojai' => 'Darbuotojai'
+        'darbuotojai' => 'Darbuotojai',
+        'klientai' => 'Klientai',
+        'sutartys' => 'Sutartys'
     );
 }
 
