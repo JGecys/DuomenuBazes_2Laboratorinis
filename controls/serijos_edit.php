@@ -3,7 +3,7 @@
 include 'libraries/serijos.class.php';
 include 'libraries/zanrai.class.php';
 $series = new serijos();
-$zanrai = new zanrai();
+$padaliniai = new zanrai();
 
 $formErrors = null;
 $fields = array();
@@ -88,7 +88,7 @@ if (!empty($_POST['submit'])) {
                 <select name="fk_zanras" title=''>
                     <?php
 
-                    $zanraiList = $zanrai->getAll(null, null);
+                    $zanraiList = $padaliniai->getAll(null, null);
 
                     foreach ($zanraiList as $key => $val) {
                         $selected = '';

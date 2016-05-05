@@ -73,11 +73,6 @@ define('NUMBER_OF_ROWS_IN_PAGE', 10);
                     echo "<li><a href='index.php?module=" . $key . "'" . (($module == $key) ? ' class="active"' : '') . ">" . $val . "</a></li>";
                 } ?>
             </ul>
-            <ul class="float-right">
-                <li><a href="index.php?module=report" title="Ataskaitos"<?php if ($module == 'report') {
-                        echo 'class="active"';
-                    } ?>>Ataskaitos</a></li>
-            </ul>
         </div>
         <div id="contentMain">
             <?php

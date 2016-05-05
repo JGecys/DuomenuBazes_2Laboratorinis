@@ -17,7 +17,8 @@ class config
         'padaliniai' => 'Padaliniai',
         'darbuotojai' => 'Darbuotojai',
         'klientai' => 'Klientai',
-        'sutartys' => 'Sutartys'
+        'sutartys' => 'Sutartys',
+        'diskai' => 'Diskai'
     );
 }
 

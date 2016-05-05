@@ -3,7 +3,7 @@
 include 'libraries/padaliniai.class.php';
 include 'libraries/miestai.class.php';
 $padaliniai = new padaliniai();
-$miestai = new miestai();
+$zanrai = new miestai();
 
 $formErrors = null;
 $fields = array();
@@ -94,7 +94,7 @@ if (!empty($_POST['submit'])) {
                 <select id="fk_miestas" name="fk_miestas" title=''>
                     <?php
 
-                    $miestaiList = $miestai->getAll(null, null);
+                    $miestaiList = $zanrai->getAll(null, null);
 
                     foreach ($miestaiList as $key => $val) {
                         $selected = '';

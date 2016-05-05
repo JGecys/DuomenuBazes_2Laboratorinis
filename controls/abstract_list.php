@@ -30,6 +30,9 @@ function getLib($module)
         case 'sutartys':
             include 'libraries/sutartys.class.php';
             return new sutartys();
+        case 'diskai':
+            include 'libraries/diskai.class.php';
+            return new diskai();
         default:
             include 'libraries/zanrai.class.php';
             return new zanrai();

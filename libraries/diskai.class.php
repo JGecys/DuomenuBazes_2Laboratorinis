@@ -38,9 +38,11 @@ class diskai extends base
     public function getAll($limit = null, $offset = null)
     {
         $query = "  SELECT diskai.*,
-                          filmai.pavadinimas AS pavadinimas
+                          filmai.pavadinimas AS pavadinimas,
+                          padaliniai.padalinys AS padalinys
                     FROM diskai
-                    INNER JOIN filmai ON filmai.id = diskai.fk_filmas";
+                    INNER JOIN filmai ON filmai.id = diskai.fk_filmas
+                    INNER JOIN padaliniai ON padaliniai.id = diskai.fk_vieta";
         return parent::getAllCustomQuery($query, $limit, $offset);
     }
 
@@ -83,9 +85,23 @@ class diskai extends base
     public function getRowFromData($data)
     {
         return "<td>{$data['id']}</td>"
+        . "<td>{$data['pavadinimas']}</td>"
         . "<td>{$data['kiek_kartu_nuomuota']}</td>"
-        . "<td>{$data['fk_filmas']}</td>"
-        . "<td>{$data['fk_vieta']}</td>";
+        . "<td>{$data['padalinys']}</td>";
+    }
+    
+    public function getSeriesSorted()
+    {
+        $query = "SELECT * FROM serijos ORDER BY serijos.serija ASC";
+
+        return mysql::select($query);
+        
+    }
+    
+    public function getFilmsForSeries($id)
+    {
+        $query = "SELECT * FROM filmai WHERE filmai.fk_serija = {$id}";
+        return mysql::select($query);
     }
 
     public function getCreateNewMessage()
