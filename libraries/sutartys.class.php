@@ -34,7 +34,7 @@ class sutartys extends base
     {
         return 0;
     }
-    
+
     public function insert($data)
     {
         $query = "  INSERT INTO sutartys
@@ -94,6 +94,172 @@ class sutartys extends base
         mysql::query($query);
     }
 
+
+    public function getContracts($dateFrom, $dateTo, $pavarde = null)
+    {
+        $whereClauseString = "";
+        if (!empty($dateFrom)) {
+            $whereClauseString .= " WHERE `sutartys`.`sutarties_data`>='{$dateFrom}'";
+            if (!empty($dateTo)) {
+                $whereClauseString .= " AND `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        } else {
+            if (!empty($dateTo)) {
+                $whereClauseString .= " WHERE `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        }
+        
+        $whereClauseLastname = "";
+        if(!empty($pavarde)) {
+            if(empty($whereClauseString)){
+                $whereClauseLastname = "WHERE ";
+            }else {
+                $whereClauseLastname = " AND ";
+            }
+            $whereClauseLastname = $whereClauseLastname . "`klientai`.`pavarde`=\"{$pavarde}\"";
+        }
+
+        $query = "  SELECT  sutartys.id,
+							sutartys.sutarties_data,
+							klientai.id AS kliento_id,
+							klientai.asmens_kodas,
+							klientai.vardas,
+						    klientai.pavarde,
+						    sutartys.kaina as sutarties_kaina,
+						    IFNULL(sum(papildoma_iranga.kaina), 0) as sutarties_papildomos_irangos_kaina,
+						    t.bendra_kliento_sutarciu_kaina,
+						    s.bendra_kliento_irangos_kaina
+					FROM sutartys
+						INNER JOIN klientai
+							ON sutartys.fk_uzsakovas=klientai.id
+						LEFT JOIN papildoma_iranga
+							ON sutartys.fk_papildoma_iranga=papildoma_iranga.id
+						LEFT JOIN (
+							SELECT klientai.id, asmens_kodas,
+									sum(sutartys.kaina) AS bendra_kliento_sutarciu_kaina
+							FROM sutartys
+								INNER JOIN klientai
+									ON sutartys.fk_uzsakovas=klientai.id
+							{$whereClauseString}
+							{$whereClauseLastname}
+							GROUP BY asmens_kodas
+						) t ON t.id=klientai.id
+						LEFT JOIN (
+							SELECT klientai.id, asmens_kodas,
+									IFNULL(papildoma_iranga.kaina, 0) as bendra_kliento_irangos_kaina
+							FROM sutartys
+								INNER JOIN klientai
+									ON sutartys.fk_uzsakovas=klientai.id
+								LEFT JOIN papildoma_iranga
+									ON sutartys.fk_papildoma_iranga=papildoma_iranga.id
+								{$whereClauseString}
+							    {$whereClauseLastname}							
+								GROUP BY `asmens_kodas`
+						) s ON s.id=klientai.id
+					{$whereClauseString}
+					{$whereClauseLastname}
+					GROUP BY sutartys.id ORDER BY klientai.pavarde ASC";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+
+    public function getSumPriceOfContracts($dateFrom, $dateTo, $pavarde=null) {
+        $whereClauseString = "";
+        if(!empty($dateFrom)) {
+            $whereClauseString .= " WHERE `sutartys`.`sutarties_data`>='{$dateFrom}'";
+            if(!empty($dateTo)) {
+                $whereClauseString .= " AND `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        } else {
+            if(!empty($dateTo)) {
+                $whereClauseString .= " WHERE `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        }
+        $whereClauseLastname = "";
+        if(!empty($pavarde)) {
+            if(empty($whereClauseString)){
+                $whereClauseLastname = "WHERE ";
+            }else {
+                $whereClauseLastname = " AND ";
+            }
+            $whereClauseLastname = $whereClauseLastname . "`klientai`.`pavarde`=\"{$pavarde}\"";
+        }
+
+
+        $query = "  SELECT sum(`sutartys`.`kaina`) AS `nuomos_suma`
+					FROM `sutartys`
+					INNER JOIN klientai on sutartys.fk_uzsakovas=klientai.id
+					{$whereClauseString}
+					{$whereClauseLastname}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+
+    public function getSumPriceOfOrderedServices($dateFrom, $dateTo, $pavarde=null) {
+        $whereClauseString = "";
+        if(!empty($dateFrom)) {
+            $whereClauseString .= " WHERE `sutartys`.`sutarties_data`>='{$dateFrom}'";
+            if(!empty($dateTo)) {
+                $whereClauseString .= " AND `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        } else {
+            if(!empty($dateTo)) {
+                $whereClauseString .= " WHERE `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        }
+        $whereClauseLastname = "";
+        if(!empty($pavarde)) {
+            if(empty($whereClauseString)){
+                $whereClauseLastname = "WHERE ";
+            }else {
+                $whereClauseLastname = " AND ";
+            }
+            $whereClauseLastname = $whereClauseLastname . "`klientai`.`pavarde`=\"{$pavarde}\"";
+        }
+
+        $query = "  SELECT sum(papildoma_iranga.kaina) AS `paslaugu_suma`
+					FROM `sutartys`
+						INNER JOIN `papildoma_iranga`
+							ON `sutartys`.`fk_papildoma_iranga`=`papildoma_iranga`.`id`
+					{$whereClauseString}
+					{$whereClauseLastname}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+
+    public function getDelayedContracts($dateFrom, $dateTo) {
+        $whereClauseString = "";
+        if(!empty($dateFrom)) {
+            $whereClauseString .= " AND `sutartys`.`sutarties_data`>='{$dateFrom}'";
+            if(!empty($dateTo)) {
+                $whereClauseString .= " AND `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        } else {
+            if(!empty($dateTo)) {
+                $whereClauseString .= " AND `sutartys`.`sutarties_data`<='{$dateTo}'";
+            }
+        }
+
+        $query = "  SELECT sutartys.id,
+						   sutartys.sutarties_data,
+						   sutartys.planuojama_grazinimo_data,
+						   IF(faktine_grazinimo_data='0000-00-00 00:00:00', 'negrąžinta', faktine_grazinimo_data) AS grazinta,
+						   klientai.vardas,
+						   klientai.pavarde
+					FROM sutartys
+						INNER JOIN klientai
+							ON sutartys.fk_uzsakovas=klientai.id
+					WHERE (DATEDIFF(faktine_grazinimo_data, planuojama_grazinimo_data) >= 1 OR
+						(faktine_grazinimo_data = '0000-00-00 00:00:00' AND DATEDIFF(NOW(), planuojama_grazinimo_data) >= 1))
+					{$whereClauseString}";
+        $data = mysql::select($query);
+
+        return $data;
+    }
+    
 
     public function getTableHeaders()
     {

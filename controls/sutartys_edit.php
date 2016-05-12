@@ -17,6 +17,8 @@ $mokesciai = new mokesciai();
 $klientai = new klientai();
 $mokejimai = new mokejimai();
 
+date_default_timezone_set('Europe/Vilnius');
+
 $formErrors = null;
 $fields = array();
 
@@ -35,6 +37,9 @@ $required = array(
 
 // maksimalūs leidžiami laukų ilgiai
 $maxLengths = array();
+$dateCheck = false;
+$dateCheck2 = false;
+$dateCheck3= false;
 
 // paspaustas išsaugojimo mygtukas
 if (!empty($_POST['submit'])) {
@@ -55,7 +60,10 @@ if (!empty($_POST['submit'])) {
     include 'utils/validator.class.php';
     $validator = new validator($validations, $required, $maxLengths);
 
-    if ($validator->validate($_POST)) {
+    $dateCheck = strtotime($_POST['sutarties_data']) <= strtotime($_POST['nuomos_data']);
+    $dateCheck2 = strtotime($_POST['nuomos_data']) <= strtotime($_POST['planuojama_grazinimo_data']);
+
+    if ($validator->validate($_POST) && $dateCheck && $dateCheck2) {
         // suformuojame laukų reikšmių masyvą SQL užklausai
         $data = $validator->preparePostFieldsForSQL();
         if (isset($data['id'])) {
@@ -74,6 +82,12 @@ if (!empty($_POST['submit'])) {
         header("Location: index.php?module={$module}&success");
         die();
     } else {
+        if(!$dateCheck){
+            $validator->addError('nuomos_data','Turi buti didesne nei sutarties data');
+        }
+        if(!$dateCheck2){
+            $validator->addError('planuojama_grazinimo_data','Turi buti didesne nei nuomos data');
+        }
         // gauname klaidų pranešimą
         $formErrors = $validator->getErrorHTML();
         // gauname įvestus laukus
@@ -107,19 +121,19 @@ if (!empty($_POST['submit'])) {
             <p>
                 <label class="field" for="sutarties_data">Sutarties data<?php echo in_array('sutarties_data', $required) ? '<span> *</span>' : ''; ?></label>
                 <input type="text" id="sutarties_data" name="sutarties_data" class="textbox-150 date"
-                       value="<?php echo isset($fields['sutarties_data']) ? $fields['sutarties_data'] : ''; ?>">
+                       value="<?php echo isset($fields['sutarties_data']) ? $fields['sutarties_data'] : date("Y-m-d"); ?>">
                 <?php if (key_exists('sutarties_data', $maxLengths)) echo "<span class='max-len'>(iki {$maxLengths['sutarties_data']} simb.)</span>"; ?>
             </p>
             <p>
                 <label class="field" for="nuomos_data">Nuomos data<?php echo in_array('nuomos_data', $required) ? '<span> *</span>' : ''; ?></label>
                 <input type="text" id="nuomos_data" name="nuomos_data" class="textbox-150 date"
-                       value="<?php echo isset($fields['nuomos_data']) ? $fields['nuomos_data'] : ''; ?>">
+                       value="<?php echo isset($fields['nuomos_data']) ? $fields['nuomos_data'] : date("Y-m-d"); ?>">
                 <?php if (key_exists('nuomos_data', $maxLengths)) echo "<span class='max-len'>(iki {$maxLengths['nuomos_data']} simb.)</span>"; ?>
             </p>
             <p>
                 <label class="field" for="planuojama_grazinimo_data">Planuojama grazinimo data<?php echo in_array('planuojama_grazinimo_data', $required) ? '<span> *</span>' : ''; ?></label>
                 <input type="text" id="planuojama_grazinimo_data" name="planuojama_grazinimo_data" class="textbox-150 date"
-                       value="<?php echo isset($fields['planuojama_grazinimo_data']) ? $fields['planuojama_grazinimo_data'] : ''; ?>">
+                       value="<?php echo isset($fields['planuojama_grazinimo_data']) ? $fields['planuojama_grazinimo_data'] : date("Y-m-d"); ?>">
                 <?php if (key_exists('planuojama_grazinimo_data', $maxLengths)) echo "<span class='max-len'>(iki {$maxLengths['planuojama_grazinimo_data']} simb.)</span>"; ?>
             </p>
             <p>

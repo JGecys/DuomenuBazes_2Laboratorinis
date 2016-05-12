@@ -2,6 +2,8 @@
 
 class config
 {
+    const TITLE = "Filmų nuomos IS";
+    
     const DB_SERVER = 'localhost';
     const DB_NAME = 'nuoma';
     const DB_USERNAME = 'root';

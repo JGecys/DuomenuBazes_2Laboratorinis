@@ -25,8 +25,8 @@ if(!empty($_POST['submit'])) {
     // nustatome laukų validatorių tipus
     $validations = array (
         'asmens_kodas' => 'alfanum',
-        'vardas' => 'alfanum',
-        'pavarde' => 'alfanum',
+        'vardas' => 'name',
+        'pavarde' => 'name',
         'telefonas' => 'phone',
         'gimimo_data' => 'date',
         'e_pastas' => 'anything');

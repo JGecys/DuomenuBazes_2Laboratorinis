@@ -26,7 +26,8 @@ class validator
 		'alfanum' => "^[0-9a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ ,.-_\\s\?\!]+\$", // tekstas
 		'not_empty' => "[a-z0-9A-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ]+", // bet kokia reikšmė, kuri prasideda raide arba skaitmeniu
 		'words' => "^[A-Za-ząčęėįšųūžĄČĘĖĮŠŲŪŽ]+[A-Za-ząčęėįšųūžĄČĘĖĮŠŲŪŽ \\s]*\$", // žodžiai
-		'phone' => "^[0-9]{9,14}\$" // telefonas (pvz.: 860000000)
+		'phone' => "^[0-9]{9,14}\$", // telefonas (pvz.: 860000000)
+		'name' => "^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ]+\$"
 		/* BE ŠIŲ FORMATŲ DAR GALIMA NAUDOTI STANDARTINIUS:
 		 * email,
 		 * int,
@@ -124,6 +125,7 @@ class validator
 	 * @return type
 	 */
     public function getErrorHTML() {
+		$output = null;
     	if(!empty($this->errors)) {
     		$errors = array();
     		foreach($this->errors as $key=>$val) {
@@ -140,7 +142,7 @@ class validator
 	 * @param type $field
 	 * @param type $type
 	 */
-    private function addError($field, $type='string') {
+    public function addError($field, $type='string') {
     	$this->errors[$field] = $type;
     }
 

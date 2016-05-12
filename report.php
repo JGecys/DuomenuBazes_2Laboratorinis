@@ -5,6 +5,9 @@
 	// iškviečiame prisijungimo prie duomenų bazės klasę
 	include 'utils/mysql.class.php';
 
+
+	date_default_timezone_set('Europe/Vilnius');
+
 	// nustatome pasirinktos ataskaitos id
 	$id = '';
 	if(isset($_GET['id'])) {
@@ -18,7 +21,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="robots" content="noindex">
-		<title>Automobilių nuomos IS</title>
+		<title><?php echo config::TITLE;?></title>
 		<link rel="stylesheet" type="text/css" href="scripts/datetimepicker/jquery.datetimepicker.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="style/main.css" media="screen" />
 		<script type="text/javascript" src="scripts/jquery-1.12.0.min.js"></script>
@@ -29,9 +32,9 @@
 		<div id="body">
 			<?php
 				switch($id) {
-					case 1: include "controls/contract_report.php"; break;
-					case 2: include "controls/service_report.php"; break;
-					case 3: include "controls/delayed_cars_report.php"; break;
+					case 1: include "controls/sutartys_report.php"; break;
+					case 2: include "controls/delayed_contracts_report.php"; break;
+//					case 3: include "controls/service_report.php"; break;
 					default: break;
 				}
 			?>

@@ -63,7 +63,7 @@ define('NUMBER_OF_ROWS_IN_PAGE', 10);
 <body>
 <div id="body">
     <div id="header">
-        <h3 id="slogan"><a href="index.php">Filmų nuomos IS</a></h3>
+        <h3 id="slogan"><a href="index.php"><?php echo config::TITLE;?></a></h3>
     </div>
     <div id="content">
         <div id="topMenu">
